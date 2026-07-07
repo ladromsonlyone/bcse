@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCSE — одежда с открытым составом</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EDEAE2;
+    --bg-alt:#E2DDCF;
+    --paper:#F7F5EF;
+    --ink:#17181A;
+    --ink-soft:#54554F;
+    --olive:#55624A;
+    --olive-dark:#3C4534;
+    --rust:#A6432D;
+    --line:#C4BDAC;
+    --radius-tag:3px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-family:'Archivo Black',sans-serif;font-weight:400;letter-spacing:-0.01em;line-height:1.05;text-transform:uppercase;}
+
+  /* ---------- stitched divider ---------- */
+  .stitch{
+    border:none;
+    border-top:2px dashed var(--line);
+    margin:0;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--bg);
+    border-bottom:2px dashed var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Archivo Black',sans-serif;
+    font-size:24px;letter-spacing:0.02em;
+  }
+  .logo span{color:var(--olive);}
+  nav.links{display:flex;gap:36px;font-size:14px;}
+  nav.links a{position:relative;padding:4px 0;}
+  nav.links a:after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--ink);transition:width .25s ease;
+  }
+  nav.links a:hover:after{width:100%;}
+  .nav-right{display:flex;align-items:center;gap:20px;}
+  .cart-btn{
+    display:flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    border:1.5px solid var(--ink);border-radius:var(--radius-tag);
+    padding:8px 14px;
+    transition:background .2s ease,color .2s ease;
+  }
+  .cart-btn:hover{background:var(--ink);color:var(--paper);}
+  .burger{display:none;font-size:24px;background:none;border:none;cursor:pointer;color:var(--ink);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:96px 0 80px;
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--olive-dark);
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow:before{content:"";display:inline-block;width:22px;height:1px;background:var(--olive-dark);}
+  .hero h1{font-size:clamp(40px,5.2vw,68px);margin-bottom:26px;}
+  .hero p.sub{font-size:17px;color:var(--ink-soft);max-width:460px;margin-bottom:34px;}
+  .btn-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace;font-size:13.5px;letter-spacing:0.02em;
+    padding:15px 26px;border-radius:var(--radius-tag);
+    display:inline-flex;align-items:center;gap:10px;
+    transition:transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .btn-fill{background:var(--ink);color:var(--paper);}
+  .btn-fill:hover{background:var(--olive-dark);transform:translateY(-2px);}
+  .btn-ghost{border:1.5px solid var(--ink);}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px);}
+
+  /* hero tag graphic */
+  .hero-visual{display:flex;justify-content:center;}
+  .thread{
+    width:1px;height:64px;background:var(--ink-soft);margin:0 auto;
+  }
+  .swing-tag{
+    display:block;
+    transform-origin:50% 30px;
+    animation:swing 6s ease-in-out infinite;
+  }
+  .hero-visual .thread{margin-bottom:-1px;}
+  @keyframes swing{
+    0%,100%{transform:rotate(-2.5deg);}
+    50%{transform:rotate(2.5deg);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .swing-tag{animation:none;}
+  }
+
+  /* ---------- principles ---------- */
+  .principles{padding:70px 0;border-top:2px dashed var(--line);border-bottom:2px dashed var(--line);}
+  .principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .principle{
+    background:var(--paper);border:1px solid var(--line);border-radius:10px;
+    padding:30px 26px;
+  }
+  .principle .num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--olive-dark);letter-spacing:.1em;margin-bottom:16px;display:block;}
+  .principle h3{font-size:19px;margin-bottom:12px;}
+  .principle p{font-size:14.5px;color:var(--ink-soft);}
+
+  /* ---------- section heading ---------- */
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:44px;flex-wrap:wrap;gap:16px;
+  }
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);}
+  .section-head .tag-label{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);
+    border:1px dashed var(--line);padding:6px 12px;border-radius:20px;
+  }
+
+  /* ---------- catalog ---------- */
+  .catalog{padding:90px 0;}
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .tagcard{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:24px 22px 22px;
+    transition:transform .25s ease, box-shadow .25s ease;
+    position:relative;
+  }
+  .tagcard:hover{transform:translateY(-6px) rotate(-0.6deg);}
+  .tagcard .hole{
+    width:10px;height:10px;border:1.5px solid var(--ink-soft);border-radius:50%;
+    position:absolute;top:16px;right:16px;background:var(--bg);
+  }
+  .garment-icon{width:100%;height:150px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .garment-icon svg{width:96px;height:96px;stroke:var(--ink);fill:none;stroke-width:2;}
+  .tagcard h3{font-size:17px;text-transform:none;font-family:'IBM Plex Sans',sans-serif;font-weight:600;margin-bottom:6px;}
+  .tagcard .code{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);letter-spacing:.04em;margin-bottom:14px;display:block;}
+  .tagcard .meta{font-size:13px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:12px;margin-top:6px;}
+  .tagcard .meta div{display:flex;justify-content:space-between;padding:3px 0;}
+  .tagcard .price{color:var(--rust);font-weight:600;}
+  .tagcard .sizes{display:flex;gap:6px;margin-top:14px;}
+  .tagcard .sizes span{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    border:1px solid var(--line);border-radius:4px;padding:3px 8px;color:var(--ink-soft);
+  }
+
+  /* ---------- story ---------- */
+  .story{padding:90px 0;border-top:2px dashed var(--line);}
+  .story-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:center;}
+  .weave{
+    aspect-ratio:4/5;border-radius:12px;
+    background:
+      repeating-linear-gradient(45deg, transparent 0 10px, rgba(23,24,26,0.05) 10px 12px),
+      repeating-linear-gradient(-45deg, transparent 0 10px, rgba(23,24,26,0.05) 10px 12px),
+      var(--bg-alt);
+    border:1px solid var(--line);
+    position:relative;
+  }
+  .weave .swatch-tag{
+    position:absolute;bottom:-18px;right:-18px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:14px 16px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);
+    box-shadow:0 4px 0 var(--line);
+  }
+  .story h2{font-size:clamp(28px,3.4vw,38px);margin-bottom:22px;}
+  .story p{color:var(--ink-soft);font-size:15.5px;margin-bottom:18px;max-width:520px;}
+  blockquote{
+    font-family:'Archivo Black',sans-serif;font-weight:400;
+    font-size:20px;line-height:1.35;color:var(--olive-dark);
+    border-left:3px solid var(--olive);padding-left:20px;margin:26px 0;
+    text-transform:none;
+  }
+
+  /* ---------- stores ---------- */
+  .stores{padding:90px 0;border-top:2px dashed var(--line);}
+  .store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .store{border:1px solid var(--line);border-radius:10px;padding:22px 24px;background:var(--paper);}
+  .store h3{font-size:16px;text-transform:none;font-family:'IBM Plex Sans',sans-serif;font-weight:600;margin-bottom:8px;}
+  .store p{font-size:13.5px;color:var(--ink-soft);}
+  .store .hours{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--olive-dark);margin-top:10px;display:block;}
+
+  /* ---------- newsletter ---------- */
+  .newsletter{
+    padding:80px 0;border-top:2px dashed var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;
+  }
+  .newsletter h2{font-size:clamp(24px,3vw,32px);max-width:440px;margin-top:6px;line-height:1.2;}
+  .nl-form{display:flex;gap:0;border:1.5px solid var(--ink);border-radius:var(--radius-tag);overflow:hidden;min-width:340px;}
+  .nl-form input{
+    border:none;background:var(--paper);padding:15px 18px;font-family:'IBM Plex Sans',sans-serif;
+    font-size:14px;flex:1;outline:none;color:var(--ink);
+  }
+  .nl-form button{
+    border:none;background:var(--ink);color:var(--paper);padding:0 22px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;cursor:pointer;transition:background .2s ease;
+  }
+  .nl-form button:hover{background:var(--olive-dark);}
+  .nl-note{font-size:12px;color:var(--ink-soft);margin-top:10px;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:2px dashed var(--line);padding:56px 0 40px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px;}
+  .footer-grid h4{font-size:12.5px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:16px;}
+  .footer-grid ul{list-style:none;}
+  .footer-grid li{margin-bottom:9px;font-size:14px;}
+  .footer-grid li a:hover{color:var(--olive-dark);}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);flex-wrap:wrap;gap:12px;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:920px){
+    nav.links{display:none;}
+    .burger{display:block;}
+    .hero{grid-template-columns:1fr;text-align:left;}
+    .hero-visual{order:-1;margin-bottom:20px;}
+    .principles-grid{grid-template-columns:1fr 1fr;}
+    .cat-grid{grid-template-columns:1fr 1fr;}
+    .store-grid{grid-template-columns:1fr;}
+    .story-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .principles-grid{grid-template-columns:1fr;}
+    .cat-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .newsletter{flex-direction:column;align-items:flex-start;padding-top:64px;}
+    .nl-form{width:100%;min-width:0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">BC<span>SE</span></div>
+    <nav class="links">
+      <a href="#catalog">Каталог</a>
+      <a href="#story">О бренде</a>
+      <a href="#stores">Магазины</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="nav-right">
+      <a class="cart-btn" href="#">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L22 8H6"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+        корзина / 0
+      </a>
+      <button class="burger" aria-label="меню">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div>
+      <div class="eyebrow">Состав указан честно</div>
+      <h1>Одежда, у которой<br>ничего не спрятано<br>в составе</h1>
+      <p class="sub">BCSE делает базовый гардероб для города: плотные хлопки, устойчивые швы и бирка с полным составом на каждой вещи — без «100% нейлон» мелким шрифтом.</p>
+      <div class="btn-row">
+        <a class="btn btn-fill" href="#catalog">Смотреть коллекцию →</a>
+        <a class="btn btn-ghost" href="#story">Как мы шьём</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div>
+        <div class="thread"></div>
+        <div class="swing-tag">
+          <svg width="220" height="280" viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="200" height="260" rx="6" fill="#F7F5EF" stroke="#17181A" stroke-width="2"/>
+            <circle cx="110" cy="30" r="7" fill="none" stroke="#17181A" stroke-width="2"/>
+            <text x="110" y="70" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#54554F">BCSE — MADE HONEST</text>
+            <line x1="30" y1="90" x2="190" y2="90" stroke="#C4BDAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <text x="30" y="118" font-family="IBM Plex Mono, monospace" font-size="11" fill="#17181A">СОСТАВ</text>
+            <text x="30" y="138" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#54554F">100% хлопок, 280 г/м²</text>
+            <text x="30" y="164" font-family="IBM Plex Mono, monospace" font-size="11" fill="#17181A">ПОСАДКА</text>
+            <text x="30" y="184" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#54554F">свободная, унисекс</text>
+            <text x="30" y="210" font-family="IBM Plex Mono, monospace" font-size="11" fill="#17181A">УХОД</text>
+            <text x="30" y="230" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#54554F">стирка 30°, без хлора</text>
+            <line x1="30" y1="246" x2="190" y2="246" stroke="#C4BDAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <text x="30" y="264" font-family="IBM Plex Mono, monospace" font-size="12" fill="#A6432D" font-weight="600">BCSE-014-OLV</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="stitch">
+
+  <section class="principles">
+    <div class="wrap principles-grid">
+      <div class="principle reveal">
+        <span class="num">/ 01</span>
+        <h3>Открытый состав</h3>
+        <p>На каждой бирке — точный состав ткани, плотность и страна пошива. Мы не пишем «премиум хлопок», мы пишем цифры.</p>
+      </div>
+      <div class="principle reveal">
+        <span class="num">/ 02</span>
+        <h3>Швы на разрыв</h3>
+        <p>Двойная прострочка на нагруженных участках и усиленные швы в шаговом — вещь выдерживает годы, а не сезон.</p>
+      </div>
+      <div class="principle reveal">
+        <span class="num">/ 03</span>
+        <h3>Честная цена</h3>
+        <p>Без сезонных скидок на 70% — потому что вещь изначально стоит столько, сколько стоит её производство.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog" class="catalog">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Каталог</h2>
+        <span class="tag-label mono">7 позиций · весна — лето</span>
+      </div>
+      <div class="cat-grid">
+
+        <div class="tagcard reveal">
+          <div class="hole"></div>
+          <div class="garment-icon">
+            <svg viewBox="0 0 100 100"><path d="M30 15 L10 30 L20 42 L30 35 V90 H70 V35 L80 42 L90 30 L70 15 L60 22 H40 Z" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Футболка Field</h3>
+          <span class="code mono">BCSE-014-OLV</span>
+          <div class="meta">
+            <div><span>Состав</span><span>100% хлопок 280г</span></div>
+            <div><span>Цена</span><span class="price">4 200 ₽</span></div>
+          </div>
+          <div class="sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        </div>
+
+        <div class="tagcard reveal">
+          <div class="hole"></div>
+          <div class="garment-icon">
+            <svg viewBox="0 0 100 100"><path d="M25 12 H75 V28 L88 40 L78 55 L68 45 V90 H32 V45 L22 55 L12 40 L25 28 Z" stroke-linejoin="round" stroke-linecap="round"/><line x1="50" y1="12" x2="50" y2="30"/></svg>
+          </div>
+          <h3>Куртка Overshirt</h3>
+          <span class="code mono">BCSE-031-SND</span>
+          <div class="meta">
+            <div><span>Состав</span><span>98% хл. / 2% эл.</span></div>
+            <div><span>Цена</span><span class="price">11 800 ₽</span></div>
+          </div>
+          <div class="sizes"><span>S</span><span>M</span><span>L</span></div>
+        </div>
+
+        <div class="tagcard reveal">
+          <div class="hole"></div>
+          <div class="garment-icon">
+            <svg viewBox="0 0 100 100"><path d="M30 15 H70 V26 L64 90 H54 L50 45 L46 90 H36 L30 26 Z" stroke-linejoin="round" stroke-linecap="round"/><line x1="30" y1="26" x2="70" y2="26"/></svg>
+          </div>
+          <h3>Брюки Utility</h3>
+          <span class="code mono">BCSE-052-INK</span>
+          <div class="meta">
+            <div><span>Состав</span><span>100% хлопок рип-стоп</span></div>
+            <div><span>Цена</span><span class="price">7 400 ₽</span></div>
+          </div>
+          <div class="sizes"><span>28</span><span>30</span><span>32</span><span>34</span></div>
+        </div>
+
+        <div class="tagcard reveal">
+          <div class="hole"></div>
+          <div class="garment-icon">
+            <svg viewBox="0 0 100 100"><path d="M28 18 L15 28 L25 40 L32 33 V88 H68 V33 L75 40 L85 28 L72 18 H60 L50 26 L40 18 Z" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Худи Base</h3>
+          <span class="code mono">BCSE-019-GRY</span>
+          <div class="meta">
+            <div><span>Состав</span><span>80% хл. / 20% пэ</span></div>
+            <div><span>Цена</span><span class="price">8 900 ₽</span></div>
+          </div>
+          <div class="sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        </div>
+
+        <div class="tagcard reveal">
+          <div class="hole"></div>
+          <div class="garment-icon">
+            <svg viewBox="0 0 100 100"><path d="M25 15 H75 V85 H25 Z M25 30 H75 M50 15 V85" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Рубашка Twill</h3>
+          <span class="code mono">BCSE-008-WHT</span>
+          <div class="meta">
+            <div><span>Состав</span><span>100% хлопок твил</span></div>
+            <div><span>Цена</span><span class="price">6 200 ₽</span></div>
+          </div>
+          <div class="sizes"><span>S</span><span>M</span><span>L</span></div>
+        </div>
+
+        <div class="tagcard reveal">
+          <div class="hole"></div>
+          <div class="garment-icon">
+            <svg viewBox="0 0 100 100"><circle cx="50" cy="35" r="18"/><path d="M20 90 C20 65 35 55 50 55 C65 55 80 65 80 90 Z"/></svg>
+          </div>
+          <h3>Панама Camp</h3>
+          <span class="code mono">BCSE-063-KAK</span>
+          <div class="meta">
+            <div><span>Состав</span><span>100% хлопок канвас</span></div>
+            <div><span>Цена</span><span class="price">3 100 ₽</span></div>
+          </div>
+          <div class="sizes"><span>one size</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="story">
+    <div class="wrap story-grid">
+      <div class="weave reveal">
+        <div class="swatch-tag">образец ткани<br>№ 280-CTN</div>
+      </div>
+      <div class="reveal">
+        <h2>Мы шьём то,<br>что носим сами</h2>
+        <p>BCSE начался в 2019 году как небольшая мастерская, где вещи для друзей шились из остатков плотного хлопка с фабрик спецодежды. Сегодня это тот же принцип в большем масштабе: ткани, рассчитанные на нагрузку, и крой, который не меняется каждый сезон.</p>
+        <blockquote>«Бирка должна быть документом, а не рекламой»</blockquote>
+        <p>Мы указываем состав, плотность и завод на каждой вещи — так же, как это делают в спецодежде и военном обмундировании, откуда мы черпаем крой.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stores" class="stores">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Магазины</h2>
+        <span class="tag-label mono">3 города</span>
+      </div>
+      <div class="store-grid">
+        <div class="store reveal">
+          <h3>Москва</h3>
+          <p>ул. Большая Никитская, 12</p>
+          <span class="hours mono">ПН–ВС 11:00–21:00</span>
+        </div>
+        <div class="store reveal">
+          <h3>Санкт-Петербург</h3>
+          <p>Невский проспект, 55</p>
+          <span class="hours mono">ПН–ВС 11:00–20:00</span>
+        </div>
+        <div class="store reveal">
+          <h3>Алматы</h3>
+          <p>ул. Панфилова, 98</p>
+          <span class="hours mono">ПН–ВС 10:00–20:00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter wrap">
+    <div>
+      <h2>Новые вещи раз в месяц.<br>Без спама.</h2>
+      <p class="nl-note">Письмо о новых тканях и датах дропов — без скидочного шума.</p>
+    </div>
+    <form class="nl-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Готово ✓';">
+      <input type="email" placeholder="you@mail.com" required>
+      <button type="submit">Подписаться</button>
+    </form>
+  </section>
+</main>
+
+<footer id="contacts">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;">BC<span>SE</span></div>
+        <p style="font-size:13.5px;color:var(--ink-soft);max-width:260px;">Одежда с открытым составом. Пошив в Москве и Алматы с 2019 года.</p>
+      </div>
+      <div>
+        <h4>Каталог</h4>
+        <ul>
+          <li><a href="#catalog">Футболки</a></li>
+          <li><a href="#catalog">Верхняя одежда</a></li>
+          <li><a href="#catalog">Брюки</a></li>
+          <li><a href="#catalog">Аксессуары</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="#story">О бренде</a></li>
+          <li><a href="#stores">Магазины</a></li>
+          <li><a href="#">Уход за вещами</a></li>
+          <li><a href="#">Возврат</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="mailto:hello@bcse.store">hello@bcse.store</a></li>
+          <li><a href="tel:+70000000000">+7 000 000-00-00</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="stitch" style="margin-bottom:24px;">
+    <div class="footer-bottom">
+      <span>© 2026 BCSE. Все права защищены.</span>
+      <span>BCSE-SITE-001 / RU</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
